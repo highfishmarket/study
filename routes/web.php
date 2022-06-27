@@ -78,7 +78,6 @@ Route::get('/basicinsert', function (){
 
     $post -> title = 'new shivers title';
     $post -> content = ' enw shivers content';
-
     $post->save();
 
 });
