@@ -76,8 +76,9 @@ Route::get('/basicinsert', function (){
     $post = new \App\Models\Post();
 //    $post = \App\Models\Post::find();
 
-    $post -> title = 'new shivers title';
-    $post -> content = ' enw shivers content';
+    $post -> title = 'new shivers title2';
+    $post -> content = ' enw shivers content2';
+    $post -> is_admin = 0;
     $post->save();
 
 });
@@ -92,6 +93,62 @@ Route::get('/basicinsert', function (){
 
 //Route::get('/update', function(){
 //
-//    \App\Models\Post::where('id', 1)->where('is_admin', 0)->update(['title'=>'제목 바꿔바꿔', 'content'=>'내용도 바꿔바꿔']);
+//    \App\Models\Post::where('id', 1)->update(['title'=>'제목 바꿔바꿔', 'content'=>'내용도 바꿔바꿔']);
 //
 //});
+
+
+//delete
+//Route::get('/delete', function (){
+//
+//    $post = \App\Models\Post::find(2);
+//
+//    $post -> delete();
+//
+//});
+
+//Route::get('/delete2', function (){
+//
+//    \App\Models\Post::destroy(3);
+//    \App\Models\Post::destroy([4,5]);
+//    \App\Models\Post::where(id, 1)->delete();
+//
+//
+//});
+
+Route::get('/softdelete', function (){
+
+    \App\Models\Post::find(6)->delete();
+
+
+});
+
+
+//Route::get('/readsoftdelete', function (){
+//
+////    $post = \App\Models\Post::find(1);
+////    return $post;
+//
+////    $post = \App\Models\Post::withTrashed()->where('id', 1)->get();
+//    $post = \App\Models\Post::onlyTrashed()->where('is_admin', 0)->get();
+//
+//    return $post;
+//
+//});
+
+//삭제 스템프 시킨걸 초기화
+//Route::get('/restore', function (){
+//
+//    \App\Models\Post::withTrashed()->where('is_admin', 0)->restore();
+//
+//
+//
+//});
+
+//즉시삭제
+Route::get('/forcedelte', function (){
+
+//    \App\Models\Post::withTrashed()->where('is_admin', 0)->forceDelete();
+    \App\Models\Post::onlyTrashed()->where('is_admin', 0)->forceDelete();
+
+});
