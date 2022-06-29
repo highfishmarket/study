@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Models\User;
+use App\Models\Post;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -146,9 +147,37 @@ Route::get('/softdelete', function (){
 //});
 
 //즉시삭제
-Route::get('/forcedelte', function (){
+//Route::get('/forcedelte', function (){
+//
+////    \App\Models\Post::withTrashed()->where('is_admin', 0)->forceDelete();
+//    \App\Models\Post::onlyTrashed()->where('is_admin', 0)->forceDelete();
+//
+//});
 
-//    \App\Models\Post::withTrashed()->where('is_admin', 0)->forceDelete();
-    \App\Models\Post::onlyTrashed()->where('is_admin', 0)->forceDelete();
 
+//ELOQUENT Relationships
+
+// One to One relations;
+
+//Route::get('/user/{id}', function ($id){
+//
+//    return \App\Models\User::find($id)->post;
+//
+//});
+//
+//Route::get('/post/{id}/user', function ($id){
+//
+////    user 함수를 이용해서 name을 찾는다.
+//    return Post::find($id)->user->name;
+//
+//});
+
+//One to Many
+Route::get('/posts', function (){
+    $user =  User::find(1);
+    foreach ($user->posts as $post){
+
+        echo $post->title.PHP_EOL;
+
+    }
 });
